@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static '/images/favicon.ico' %}"
+    />
+    <title>NPLOnlineJudge</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 logo-1 my-2">
+          <h3>
+            <img
+              src="{% static '/images/Flag-Nepal32.gif' %}"
+              class="logo-flag"
+              alt="Flg"
+            />NEPAL ONLINE JUDGE
+          </h3>
+        </div>
+        <div class="col-6 logo-2 my-3">
+          {% if user.is_authenticated %}
+          <a href="/programmers/profile">{{ user.username }}&nbsp;</a>|
+          <a href="/programmers/logout">Logout</a>
+          {% else %}
+          <a href="/programmers/login">Login&nbsp;</a>|
+          <a href="/programmers/register">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border rounded">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/index"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contest</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/problemsets/">Problemset</a>
+            </li>
+            {% block profile %} {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/submissions/">Submissions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/programmers/profile">Profile</a>
+            </li>
+            {% endif %} {% endblock %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    {% block maincontent %} 
+    {% comment %} main content goes here {% endcomment %} 
+    {% endblock %}
+
+    <div class="container navbar-light bg-light">
+      <div class="row">
+        <div class="footer p-3">
+          @Copyright 2019 All right
+        </div>
+      </div>
+    </div>
+    <script>
+        function enableTab(id) {
+        var el = document.getElementById(id);
+        el.onkeydown = function(e) {
+            if (e.keyCode === 9) { // tab was pressed
+                // get caret position/selection
+                var val = this.value,
+                    start = this.selectionStart,
+                    end = this.selectionEnd;
+                // set textarea value to: text before caret + tab + text after caret
+                this.value = val.substring(0, start) + '\t' + val.substring(end);
+                // put caret at right position again
+                this.selectionStart = this.selectionEnd = start + 1;
+                // prevent the focus lose
+                return false;
+            }
+        };
+    }
+    // Enable the tab character onkeypress (onkeydown) inside textarea...
+    // ... for a textarea that has an `id="my-textarea"`
+    enableTab('code');
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

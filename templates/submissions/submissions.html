@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+
+{% block maincontent %}
+<div class="container my-3">
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Problem Title</th>
+            <th scope="col" class="text-right">Tag</th>
+            <th scope="col" class="text-right">Time</th>
+            <th scope="col" class="text-right">Memory</th>
+            <th scope="col" class="text-right">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+              <tr>
+                <td class=""><a href="/submissions/{{ submission.id }}" class="mb-2" style="color:black;">
+                  <b>{{ submission.id }}</b></a></td>
+                <td><a href="/problemsets/{{ problem.id }}" class="mb-2" style="color:black;">
+                  <b>{{ submission.problemname }}</b></a>
+                </td>
+                <td class="text-right">{{ submission.problemtag }}</td>
+                <td class="text-right">{{ submission.timetaken }}</td>
+                <td class="text-right">{{ submission.memorytaken }}</td>
+                {% if submission.status == "0" %}
+                  <td class="text-right" style="color:green;">{{ submission.statusname }}</td>
+                {% else %}
+                  <td class="text-right" style="color:red;">{{ submission.statusname }}</td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+        </tbody>
+    
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block maincontent %}
+  <div class="container">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-2" role="alert">
+          {{ message }}
+        </div>
+    {% endfor %}
+  </div>
+
+  <div class="container mt-2">
+  <pre id="code" style="font-size:1.2rem;" data-lang="{{ submission.lang }}">{{ submission.code }}
+  </pre>
+  </div>
+  
+  {% if user.is_authenticated %}
+     <div class="container">
+      <hr>
+      <p class="lead">
+        You can view submissions.
+      </p>
+    </div>
+  {% else %}
+    <div class="container">
+      <hr>
+      <p class="lead">
+        You need to login to view submissions.
+      </p>
+    </div>
+  {% endif %}
+  <script src="{% static '/js/highlighter.js' %}"></script>
+{% endblock %}

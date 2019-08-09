@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+  <div class="container mt-5">
+    <div class="row">
+     {% if user.is_authenticated %}
+      <div class="col-6">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ userprofile.photo.url }}" class="card-img-top" alt="profile picture">
+          <div class="card-body">
+            <h5 class="card-title">{{ usercore.first_name }} {{ usercore.last_name }}</h5>
+            <h6 class="card-title">From {{ userprofile.address }}</h5>
+            <p class="card-text">{{ userprofile.description }}</p>
+            {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="container">
+          Progress Graph
+        </div>
+      </div>
+     {% else %}
+      <p class="lead">You are not logged in</p>
+     {% endif %}
+    </div>
+  </div>
+{% endblock %}

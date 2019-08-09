@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+  <div class="container">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-2" role="alert">
+          {{ message }}
+        </div>
+    {% endfor %}
+  </div>
+
+  {{ problem.statement | safe }}
+  
+  {% if user.is_authenticated %}
+    <div class="container">
+    <hr>
+    <form method="POST" action="">
+    {% csrf_token %}
+    <legend>Solution Code</legend>
+    <p class="lead">In case of Java, use Main class</p>
+    <div class="form-group"  class="text-monospace">
+      <textarea name="code" class="form-control" id="code" rows="20"></textarea>
+    </div>
+      <div class="form-group">
+        <label for="language">Language</label>
+        <select name="lang" class="form-control" id="language">
+          <option>C</option>
+          <option>C++</option>
+          <option>Java</option>
+          <option>Python3</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  {% else %}
+    <div class="container">
+      <hr>
+      <p class="lead">
+        You need to login to submit solutions.
+      </p>
+    </div>
+  {% endif %}
+{% endblock %}

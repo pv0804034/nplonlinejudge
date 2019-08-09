@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+
+{% block maincontent %}
+<div class="container my-3">
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+            <th scope="col">Title</th>
+            {% comment %} <th scope="col">Description</th> {% endcomment %}
+            <th scope="col" class="text-right">Tag</th>
+            <th scope="col" class="text-right">Score</th>
+            <th scope="col" class="text-right">Accepted/Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for problem in problems %}
+              
+              <tr>
+                <td><a href="/problemsets/{{ problem.id }}" class="mb-2" style="color:black;">
+                  <b>{{ problem.title }}</b></a>
+                </td>
+                {% comment %} <td>{{ problem.statement | safe }}</td> {% endcomment %}
+                <td class="text-right">{{ problem.tag }}</td>
+                <td class="text-right">{{ problem.score }}</td>
+                <td class="text-right">0/0</td>
+              </tr>
+              {% endfor %}
+        </tbody>
+    
+  </table>
+</div>
+{% endblock %}
