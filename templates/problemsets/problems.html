@@ -5,6 +5,7 @@
   <table class="table">
       <thead class="thead-dark">
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Title</th>
             {% comment %} <th scope="col">Description</th> {% endcomment %}
             <th scope="col" class="text-right">Tag</th>
@@ -14,15 +15,15 @@
         </thead>
         <tbody>
             {% for problem in problems %}
-              
               <tr>
+                <td>{{ problem.id }}</td>
                 <td><a href="/problemsets/{{ problem.id }}" class="mb-2" style="color:black;">
                   <b>{{ problem.title }}</b></a>
                 </td>
                 {% comment %} <td>{{ problem.statement | safe }}</td> {% endcomment %}
                 <td class="text-right">{{ problem.tag }}</td>
                 <td class="text-right">{{ problem.score }}</td>
-                <td class="text-right">0/0</td>
+                <td class="text-right"> {{ problem.successes }}/{{ problem.attempts }}</td>
               </tr>
               {% endfor %}
         </tbody>

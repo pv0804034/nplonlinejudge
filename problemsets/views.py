@@ -20,6 +20,9 @@ def problems(request):
 def problemstmt(request, _id):
     if request.method == 'POST':
         # post request
+        problem = Problem.objects.filter(id=_id)
+        if not problem.exists():
+            return HttpResponseNotFound()
         if request.user.is_authenticated:
             # authentic user
             # evaluate the submission
@@ -34,6 +37,12 @@ def problemstmt(request, _id):
             submission = Submission(
                 userid=userid, lang=lang, code=code, status=status, problemid=_id)
             submission.save()
+            problem = problem[0]
+            problem.attempts = problem.attempts + 1
+            if status == 0:
+                problem.successes = problem.successes + 1
+            # update the problemsets
+            problem.save()
             if remark == 0:
                 messages.success(request, details[remark])
             else:
