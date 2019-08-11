@@ -9,8 +9,8 @@ statuses = {-1: 'No status', 0: 'Solution accepted',
 
 
 def submissiondetails(request, _id):
-    # userid = request.user.id
-    res = Submission.objects.filter(id=_id)
+    userid = request.user.id
+    res = Submission.objects.filter(userid=userid).filter(id=_id)
     if not res.exists():
         return HttpResponseNotFound()
     else:

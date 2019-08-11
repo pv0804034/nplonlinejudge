@@ -5,14 +5,13 @@ import shutil
 
 def compilation(user_id, lang, code, problemid):
     code = code.replace('\r\n', '\n')
-    code.strip('\n')
+    code.rstrip()
     inputdir = 'io/input/input{}'.format(problemid)
     outputdir = 'io/output/output{}'.format(problemid)
     remark = 0
     ext = {'C': 'c', 'C++': 'cpp', 'Java': 'java', 'Python3': 'py'}
-    filename = 'problem{}.{}'.format(problemid, ext[lang])
-    absfilepath = 'submittedcodes/problem{}.{}'.format(
-        problemid, ext[lang])
+    filename = 'problem.{}'.format(ext[lang])
+    absfilepath = 'submittedcodes/problem.{}'.format(ext[lang])
     with open(absfilepath, 'w') as wf:
         wf.write(code)
     if lang == 'Java':

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block maincontent %}
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-6">
+        <img src="{{ form.instance.photo.url }}" class="img-thumbnail">
+      </div>
+      <div class="col-6">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-primary">Update profile</button>
+        </form>
+      </div>
+    </div> 
+  </div>
+{% endblock %}

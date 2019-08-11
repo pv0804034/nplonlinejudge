@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'problemsets.apps.ProblemsetsConfig',
     'submissions.apps.SubmissionsConfig',
     'blogs.apps.BlogsConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,4 @@ STATICFILES_DIRS = (
 # MEDIA_URL = '/media/'
 
 # MEDIA_ROOT = '/home/prakash/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

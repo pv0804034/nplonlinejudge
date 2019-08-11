@@ -8,10 +8,13 @@
         <div class="card" style="width: 18rem;">
           <img src="{{ userprofile.photo.url }}" class="card-img-top" alt="profile picture">
           <div class="card-body">
-            <h5 class="card-title">{{ usercore.first_name }} {{ usercore.last_name }}</h5>
+            <h5 class="card-title">{{ userprofile.user.first_name }} {{ userprofile.user.last_name }}</h5>
             <h6 class="card-title">From {{ userprofile.address }}</h5>
+            <h6 class="card-title">{{ userprofile.organization }}</h5>
             <p class="card-text">{{ userprofile.description }}</p>
-            {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+            {% if user.id == userprofile.user.id %}
+              <a href="/programmers/profile/edit" class="btn btn-primary">Edit profile</a>
+            {% endif %}
           </div>
         </div>
       </div>

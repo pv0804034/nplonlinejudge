@@ -33,4 +33,6 @@ def leaderboard(request):
                     break
         else:
             me = dict()
+    else:
+        me = dict()
     return render(request, 'leaderboard.html', {'leaderboard': leaderdata, 'me': me})
