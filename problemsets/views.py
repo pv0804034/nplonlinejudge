@@ -57,12 +57,16 @@ def problemstmt(request, _id):
                 problemid=_id).filter(status='0')
             submission = Submission(
                 userid=userid, lang=lang, code=code, status=status, problemid=_id)
-            submission.save()
+            # submission.save()
             problem = problem[0]
             problem.attempts = problem.attempts + 1
             if status == 0:
+                # increase problem solves count
                 problem.successes = problem.successes + 1
                 # if no previous success
+                print('got this far-----------------------------')
+                print('{} has length of solves: {}'.format(
+                    request.user.username, len(prevsub)))
                 if len(prevsub) == 0:
                     profile = Profile.objects.filter(user_id=request.user.id)
                     if profile.exists():
@@ -73,6 +77,7 @@ def problemstmt(request, _id):
             # update the problemsets
             # increase the score if success
             problem.save()
+            submission.save()
             if remark == 0:
                 messages.success(request, details[remark])
             else:

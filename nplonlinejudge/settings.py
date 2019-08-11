@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'programmers.apps.ProgrammersConfig',
     'problemsets.apps.ProblemsetsConfig',
-    'submissions.apps.SubmissionsConfig'
+    'submissions.apps.SubmissionsConfig',
+    'blogs.apps.BlogsConfig',
 ]
 
 MIDDLEWARE = [

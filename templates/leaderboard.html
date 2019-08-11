@@ -13,13 +13,13 @@
         </thead>
         <tbody>
             {% if user.is_authenticated %}
-              <tr class="bg-light">
+              <tr class="bg-secondary text-white">
               <td>{{ me.serial }}</td>
-                <td><a href="/programmers/profile/{{ me.user.id }}" class="mb-2" style="color:black;">
-                  <b>@{{ me.username }}</b></a>
+                <td><a href="/programmers/profile/{{ me.user.id }}" class="mb-2" style="color:white;">
+                  <b>{{ me.username }}</b></a>
                 </td>
                 <td class="">{{ me.score }}</td>
-                <td class="text-right">{{ me.organization }}</td>
+                <td class="text-right">{% if me.organization %}me.organization{% else %}-{% endif %}</td>
               </tr>
             {% endif %}
             {% for programmer in leaderboard %}
@@ -29,7 +29,7 @@
                   <b>@{{ programmer.username }}</b></a>
                 </td>
                 <td class="">{{ programmer.score }}</td>
-                <td class="text-right">{{ programmer.organization }}</td>
+                <td class="text-right">{% if programmer.organization %}programmer.organization{% else %}-{% endif %}</td>
               </tr>
               {% empty %}
                 <tr>

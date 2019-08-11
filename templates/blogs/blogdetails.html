@@ -1,0 +1,51 @@
+{% extends 'base.html' %} 
+
+{% block maincontent %}
+<div class="container my-2">
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Author</th>
+            <th scope="col">Title</th>
+            <th scope="col">When</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for blog in blogs %}
+              <tr>
+                <td class=""><a href="/submissions/{{ submission.id }}" class="mb-2" style="color:black;">
+                  <b>{{ submission.id }}</b></a></td>
+                <td><a href="/problemsets/{{ submission.problemid }}" class="mb-2" style="color:black;">
+                  <b>{{ submission.problemname }}</b></a>
+                </td>
+                <td class="">{{ submission.when }}</td>
+                <td class="text-right">{{ submission.problemtag }}</td>
+                <td class="text-right">{{ submission.timetaken }}</td>
+                <td class="text-right">{{ submission.memorytaken }}</td>
+                {% if submission.status == "0" %}
+                  <td class="text-right" ><a href="/submissions/{{ submission.id }}" class="mb-2" style="color:lime;">
+                  <b>{{ submission.statusname }}</b></a></td>
+                {% else %}
+                  <td class="text-right" ><a href="/submissions/{{ submission.id }}" class="mb-2" style="color:orangered;">
+                  <b>{{ submission.statusname }}</b></a></td>
+                {% endif %}
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="7">
+                    <p class="lead">No submissions made yet. Please solve <a href="/problemsets/" class="mb-2">problems</a> at first.</p>
+                  </td>
+                </tr>
+              {% endfor %}
+        </tbody>
+  </table>
+</div>
+<div class="container">
+  {% if submissions|length > 0 %}
+  <p class="lead">
+    Click on submission id (#) / Status to view the submission details.
+  </p>
+  {% endif %}
+</div>
+{% endblock %}

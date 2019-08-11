@@ -34,6 +34,7 @@ urlpatterns = [
     path('profile/', include('programmers.urls')),
     path('submissions/', include('submissions.urls')),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
+    path('blogs/', include('blogs.urls'), name='blogs'),
 ]
 
 if settings.DEBUG:
