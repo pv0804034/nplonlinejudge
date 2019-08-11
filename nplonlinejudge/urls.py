@@ -33,6 +33,7 @@ urlpatterns = [
     path('problemsets/', include('problemsets.urls')),
     path('profile/', include('programmers.urls')),
     path('submissions/', include('submissions.urls')),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
 ]
 
 if settings.DEBUG:

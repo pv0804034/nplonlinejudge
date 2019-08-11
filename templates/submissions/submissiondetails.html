@@ -9,25 +9,53 @@
     {% endfor %}
   </div>
 
-  <div class="container mt-2">
-  <pre id="code" style="font-size:1.2rem;" data-lang="{{ submission.lang }}">{{ submission.code }}
-  </pre>
-  </div>
-  
-  {% if user.is_authenticated %}
-     <div class="container">
-      <hr>
-      <p class="lead">
-        You can view submissions.
-      </p>
-    </div>
-  {% else %}
-    <div class="container">
-      <hr>
-      <p class="lead">
-        You need to login to view submissions.
-      </p>
-    </div>
-  {% endif %}
+  <div class="container my-2">
+  <table class='table border border-{% if submission.status == "0" %}success{% else %}danger{% endif %}'>
+      <thead class="thead-dark">
+          <tr>
+            <th scope="col"><a href="/problemsets/{{ submission.problemid }}" class="mb-2" style="color:white;">{{ submission.problemname }}</a></th>
+            <th scope="col" class="text-right">{{ submission.lang }} || {{ submission.when }}</th>
+            <th scope="col" class="text-right">{% if submission.status == "0" %}
+                  <span class="text-right" style="color:lime;">{{ submission.statusname }}
+                  ||
+                  <a href="/problemsets/" class="mb-2" style="color:white;">Solve more!</a>
+                  </span>
+                {% else %}
+                  <span class="text-right" style="color:orangered;">{{ submission.statusname }}
+                  ||
+                  <a href="/problemsets/{{ submission.problemid }}" class="mb-2" style="color:white;">Try again!</a>
+                  </span>
+                {% endif %}
+                </th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td colspan="3">
+              <pre id="code" style="font-size:1.2rem;" data-lang="{{ submission.lang }}">{{ submission.code }}
+              </pre>
+              </td>
+            </tr>
+            {% comment %} {% for submission in submissions %}
+              <tr>
+                <td class=""><a href="/submissions/{{ submission.id }}" class="mb-2" style="color:black;">
+                  <b>{{ submission.id }}</b></a></td>
+                <td><a href="/problemsets/{{ submission.problemid }}" class="mb-2" style="color:black;">
+                  <b>{{ submission.problemname }}</b></a>
+                </td>
+                <td class="">{{ submission.when }}</td>
+                <td class="text-right">{{ submission.problemtag }}</td>
+                <td class="text-right">{{ submission.timetaken }}</td>
+                <td class="text-right">{{ submission.memorytaken }}</td>
+                {% if submission.status == "0" %}
+                  <td class="text-right" style="color:green;">{{ submission.statusname }}</td>
+                {% else %}
+                  <td class="text-right" style="color:red;">{{ submission.statusname }}</td>
+                {% endif %}
+              </tr>
+              {% endfor %} {% endcomment %}
+        </tbody>
+  </table>
+</div>
   <script src="{% static '/js/highlighter.js' %}"></script>
 {% endblock %}

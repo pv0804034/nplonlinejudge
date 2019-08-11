@@ -26,7 +26,7 @@ def submissiondetails(request, _id):
 
 def submissions(request):
     userid = request.user.id
-    res = Submission.objects.filter(userid=userid)
+    res = Submission.objects.filter(userid=userid).order_by('-id')
     for i in res:
         # print(i)
         # print(type(i))

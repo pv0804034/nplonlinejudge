@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 
 {% block maincontent %}
-<div class="container my-3">
+<div class="container my-2">
   <table class="table">
       <thead class="thead-dark">
           <tr>
@@ -10,6 +10,9 @@
             {% comment %} <th scope="col">Description</th> {% endcomment %}
             <th scope="col" class="text-right">Tag</th>
             <th scope="col" class="text-right">Score</th>
+            {% if user.is_authenticated %}
+            <th scope="col" class="text-right">Solve status</th>
+            {% endif %}
             <th scope="col" class="text-right">Accepted/Total</th>
           </tr>
         </thead>
@@ -23,11 +26,13 @@
                 {% comment %} <td>{{ problem.statement | safe }}</td> {% endcomment %}
                 <td class="text-right">{{ problem.tag }}</td>
                 <td class="text-right">{{ problem.score }}</td>
+                {% if user.is_authenticated %}
+                <td class="text-right"><i>{{ problem.solvestatus }}</i></td>
+                {% endif %}
                 <td class="text-right"> {{ problem.successes }}/{{ problem.attempts }}</td>
               </tr>
               {% endfor %}
         </tbody>
-    
   </table>
 </div>
 {% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %} 
+
+{% block maincontent %}
+<div class="container my-2">
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Programmer</th>
+            <th scope="col">Score</th>
+            <th scope="col" class="text-right">Organization</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% if user.is_authenticated %}
+              <tr class="bg-light">
+              <td>{{ me.serial }}</td>
+                <td><a href="/programmers/profile/{{ me.user.id }}" class="mb-2" style="color:black;">
+                  <b>@{{ me.username }}</b></a>
+                </td>
+                <td class="">{{ me.score }}</td>
+                <td class="text-right">{{ me.organization }}</td>
+              </tr>
+            {% endif %}
+            {% for programmer in leaderboard %}
+              <tr>
+                <td>{{ programmer.serial }}</td>
+                <td><a href="/programmers/profile/{{ programmer.user.id }}" class="mb-2" style="color:black;">
+                  <b>@{{ programmer.username }}</b></a>
+                </td>
+                <td class="">{{ programmer.score }}</td>
+                <td class="text-right">{{ programmer.organization }}</td>
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="7">
+                    <p class="lead">Leaderboard is empty</p>
+                  </td>
+                </tr>
+              {% endfor %}
+        </tbody>
+  </table>
+</div>
+{% endblock %}

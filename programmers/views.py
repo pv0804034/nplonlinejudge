@@ -5,6 +5,19 @@ from programmers.models import Profile
 # Create your views here.
 
 
+def otherprofile(request, _id):
+    userid = _id
+    usercore = User.objects.filter(id=userid)
+    userprofile = Profile.objects.filter(user_id=userid)
+    if usercore.exists() and userprofile.exists():
+        usercoreobject = usercore[0]
+        userprofileobject = userprofile[0]
+    else:
+        usercoreobject = ''
+        userprofileobject = ''
+    return render(request, 'programmers/profile.html', {'usercore': usercoreobject, 'userprofile': userprofileobject})
+
+
 def profile(request):
     if request.user.is_authenticated:
         userid = request.user.id
@@ -75,6 +88,10 @@ def register(request):
                 last_name=lastname,
             )
             user.save()
+            # create the appropriate user profile
+            profile = Profile(user=user)
+            # save the profile
+            profile.save()
             messages.success(request, 'Signup Successful!')
             return redirect('login')
     else:

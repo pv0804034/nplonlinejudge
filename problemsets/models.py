@@ -21,6 +21,7 @@ class Problem(models.Model):
         blank=False, unique=False, default=0)
     successes = models.IntegerField(
         blank=False, unique=False, default=0)
+    code = models.TextField(max_length=40000, blank=False)
 
     def __str__(self):
         return self.title

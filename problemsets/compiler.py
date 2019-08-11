@@ -48,6 +48,7 @@ def compilation(user_id, lang, code, problemid):
                     systemoutput = sytemoutput.rstrip()
                     if useroutput != systemoutput:
                         # output is incorrect
+                        # print(repr(useroutput), repr(systemoutput))
                         remark = 1
                         break
     elif lang == 'Java':
@@ -81,6 +82,7 @@ def compilation(user_id, lang, code, problemid):
                     systemoutput = sytemoutput.rstrip()
                     if useroutput != systemoutput:
                         # output is incorrect
+                        # print(repr(useroutput), repr(systemoutput))
                         remark = 1
                         break
     elif lang == 'Python3':
@@ -108,6 +110,7 @@ def compilation(user_id, lang, code, problemid):
                 systemoutput = sytemoutput.rstrip()
                 if useroutput != systemoutput:
                     # output is incorrect
+                    # print(repr(useroutput), repr(systemoutput))
                     remark = 1
                     break
     return remark

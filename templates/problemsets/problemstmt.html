@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block maincontent %}
   <div class="container">
     {% for message in messages %}
@@ -10,7 +10,8 @@
   </div>
 
   {{ problem.statement | safe }}
-  
+  <div class="container mt-5">
+  </div>
   {% if user.is_authenticated %}
     <div class="container">
     <hr>
@@ -41,4 +42,5 @@
       </p>
     </div>
   {% endif %}
+ <script src="{% static '/js/highlighter.js' %}"></script>
 {% endblock %}
